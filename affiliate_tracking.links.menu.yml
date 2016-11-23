@@ -1,0 +1,7 @@
+affiliate_tracking.list:
+  title: 'Affiliate Tracking'
+  description: 'Monitor visits from affiliated links'
+  parent: system.admin
+  weight: 100
+  route_name: affiliate_tracking.list
+  base_route: system.admin_content

@@ -1,0 +1,22 @@
+/**
+ * @file
+ * Styling for the user module icons.
+ */
+
+/**
+ * Toolbar tab icon.
+ */
+.toolbar-bar .toolbar-icon-affiliate-tracking-list:before {
+  background-image: url("../svg/9973-piechart.svg");
+}
+.no-svg .toolbar-bar .toolbar-icon-affiliate-tracking-list:before {
+  background-image: url("../../../misc/icons/bebebe/person.png");
+}
+.toolbar-bar .toolbar-icon-affiliate-tracking-list:active:before,
+.toolbar-bar .toolbar-icon-affiliate-tracking-list.active:before {
+  background-image: url("../svg/9973-piechart.svg");
+}
+.no-svg .toolbar-bar .toolbar-icon-affiliate-tracking-list:active:before,
+.no-svg .toolbar-bar .toolbar-icon-affiliate-tracking-list.active:before {
+  background-image: url("../../../misc/icons/ffffff/person.png");
+}

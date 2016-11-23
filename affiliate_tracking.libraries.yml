@@ -1,0 +1,7 @@
+affiliate_tracking:
+  version: 1.x
+  css:
+    theme:
+      css/affiliate_tracking.icons.css: {}
+  js:
+    js/affiliate_tracking.js: {}

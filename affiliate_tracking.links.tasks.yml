@@ -1,4 +1,0 @@
-affiliate_tracking_list:
-  title: Affiliate Tracking
-  route_name: affiliate_tracking_list
-  base_route: system.admin_content
