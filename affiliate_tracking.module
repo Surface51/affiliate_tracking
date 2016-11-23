@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Hello module.
+ */
+
+use \Drupal\affiliate_tracking\AffiliateTrackingController;
+
+function affiliate_tracking_create_tracking_code() {
+
+}
+
+function affiliate_tracking_array() {
+	return array(
+		'admin/content/affiliate_tracking/list' => array(
+			'title' => 'Affiliate Tracking',
+			'route_name' => 'affiliate_tracking_list',
+		),
+		'admin/content/affiliate_tracking/add' => array(
+			'title' => 'Add Affiliate Tracking',
+			'route_name' => 'affiliate_tracking_add',
+		)
+	);
+}
+
+function affiliate_tracking_node_view($node, $view_mode, $langcode) {
+	if (isset($_REQUEST['affiliate'])) {
+
+		$existing_code = AffiliateTrackingController::findTrackingCode($_REQUEST['affiliate']);
+		//print_r($existing_code);
+	//	if ($exiting_code != null) {
+			$return = AffiliateTrackingController::addTrackingHit($existing_code->affiliate_id, "hit", "anonymous");
+			echo $return;
+	//	}
+	}
+}

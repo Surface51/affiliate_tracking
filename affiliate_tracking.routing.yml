@@ -1,0 +1,13 @@
+affiliate_tracking_list:
+  path: '/admin/content/affiliate_tracking/list'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::content'
+  requirements:
+    _permission: 'view affiliate tracking results'
+
+affiliate_tracking_add:
+  path: '/admin/content/affiliate_tracking/add'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::addTrackingCode'
+  requirements:
+    _permission: 'create affiliate tracking code'

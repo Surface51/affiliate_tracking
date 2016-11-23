@@ -1,0 +1,6 @@
+name: Affiliate Tracking
+description: Affiliate Tracking for registrants
+package: Custom
+type: module
+version: 1.0
+core: 8.x
