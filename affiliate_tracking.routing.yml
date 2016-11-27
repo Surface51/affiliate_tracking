@@ -5,11 +5,25 @@ affiliate_tracking.list:
   requirements:
     _permission: 'view affiliate tracking results'
 
-affiliate_tracking.add_code:
+affiliate_tracking.list_affiliates:
+  path: '/admin/affiliate_tracking/affiliates'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::contentByAffiliateCode'
+  requirements:
+    _permission: 'view affiliate tracking results'
+
+affiliate_tracking.add_code_form:
   path: '/admin/affiliate_tracking/add_code'
+  defaults:
+   _form: '\Drupal\affiliate_tracking\AffiliateTrackingForm'
+   _title: 'Add'
+  requirements:
+    _permission: 'access content'
+
+affiliate_tracking.add_code:
+  path: '/admin/affiliate_tracking/add_code/new'
   defaults:
     _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::addTrackingCode'
     _title: 'Add'
   requirements:
     _permission: 'access content'
-

@@ -11,18 +11,22 @@ function affiliate_tracking_create_tracking_code() {
 
 }
 
-function affiliate_tracking_array() {
-	return array(
-		'admin/content/affiliate_tracking' => array(
-			'title' => 'Affiliate Tracking',
-			'route_name' => 'affiliate_tracking_list',
-		),
-		'admin/content/affiliate_tracking/add' => array(
-			'title' => 'Add Affiliate Tracking',
-			'route_name' => 'affiliate_tracking_add',
-		)
-	);
-}
+// function affiliate_tracking_array() {
+// 	return array(
+// 		'admin/content/affiliate_tracking' => array(
+// 			'title' => 'Affiliate Tracking',
+// 			'route_name' => 'affiliate_tracking_list',
+// 		),
+// 		'admin/content/affiliate_tracking/affiliates' => array(
+// 			'title' => 'Affiliate Tracking',
+// 			'route_name' => 'affiliate_tracking_list',
+// 		),
+// 		'admin/content/affiliate_tracking/add' => array(
+// 			'title' => 'Add Affiliate Tracking',
+// 			'route_name' => 'affiliate_tracking_add',
+// 		)
+// 	);
+// }
 
 function affiliate_tracking_node_view($node, $view_mode, $langcode) {
 	if (isset($_REQUEST['affiliate'])) {

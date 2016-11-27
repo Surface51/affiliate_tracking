@@ -23,8 +23,15 @@ affiliate_tracking.list:
   title: 'Tracking Results'
   weight: 1
 
-affiliate_tracking.add_code:
+affiliate_tracking.list_affiliates:
+  title: List Affiliate Codes
+  route_name: affiliate_tracking.list_affiliates
+  base_route: affiliate_tracking.list
+  weight: 2
+
+
+affiliate_tracking.add_code_form:
   title: Add Code
-  route_name: affiliate_tracking.add_code
+  route_name: affiliate_tracking.add_code_form
   base_route: affiliate_tracking.list
   weight: 3

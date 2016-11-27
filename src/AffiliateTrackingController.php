@@ -59,9 +59,20 @@ class AffiliateTrackingController {
 		);
 	}
 
-	static function addTrackingCode() {
-		$name = AffiliateTrackingController::generateRandomString(20);
-		$user_info = "original user";
+	public function contentByAffiliateCode() {
+		return array(
+			'#markup' => "test",
+		);
+	}
+
+	static function addTrackingCode($requested_code = null, $user_info = "original user") {
+		if ($requested_code == null) {
+			$name = AffiliateTrackingController::generateRandomString(20);
+		} else {
+			$name = $requested_code;
+			// check to see if code exists.
+		}
+		// $user_info = "original user";
 		$result = db_insert('at_links')->fields(array(
 			'affiliate_code' => $name,
 			'user_info' => $user_info,
@@ -71,6 +82,14 @@ class AffiliateTrackingController {
 		))->execute();
 		return array(
 			'#markup' => "New tracking code is ".$name,
+		);
+	}
+
+
+	static function addTrackingCodeForm() {
+
+		return array(
+			'#markup' => "Here is your form.",
 		);
 	}
 
