@@ -2,7 +2,7 @@ $ = jQuery;
 
 function affiliate_tracking_pageLoaded() {
 	var affiliate = getUrlParameter("affiliate");
-	var action = "register";
+	var action = "hit";
 	var user = "anonymous";
 
 	if (affiliate != undefined) {

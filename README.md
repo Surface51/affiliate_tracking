@@ -5,4 +5,5 @@ D8 Affiliate Tracking Module
 ~~Allow admins to create their own tracking codes.~~
 ~~Check to see if affiliate ID exists before a hit is saved.~~
 ~~Input correct node id.~~
-Reverse Order.
+~~Reverse Order.~~
+Does it work when cache is on?

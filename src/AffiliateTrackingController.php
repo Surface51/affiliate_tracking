@@ -27,6 +27,7 @@ class AffiliateTrackingController {
 		$db = \Drupal::database();
 		$query = $db->select('at_hits', 'n');
 		$query->fields('n');
+		$query->orderBy('n.created', 'DESC');
 		$result = $query->execute();
 
 		foreach ($result as $row) {
@@ -85,6 +86,7 @@ class AffiliateTrackingController {
 		$db = \Drupal::database();
 
 		$query = $db->select('at_links', 'n');
+		$query->orderBy('n.created', 'DESC');
 		$query->fields('n');
 
 		/// REVERSE ORDER
@@ -208,6 +210,7 @@ class AffiliateTrackingController {
 		$query = $db->select('at_hits', 'n');
 		$query->fields('n');
 		$query->condition('affiliate_id', $affiliate_actual_id, "=");
+		$query->orderBy('n.created', 'DESC');
 		$result = $query->execute();
 
 		foreach ($result as $row) {
@@ -225,9 +228,9 @@ class AffiliateTrackingController {
 			}
 
 			$output['action'] = $row->action;
+			$output['user_info'] = $row->user_info;
 			$output['ip_address'] = $row->ip_address;
 			$output['referrer'] = $row->forwarder;
-			$output['user_info'] = $row->user_info;
 			$output['date'] = date("Y-m-d h:i:s", $row->created);
 
 			array_push($rows, $output);
