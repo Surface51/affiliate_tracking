@@ -61,9 +61,9 @@ class AffiliateTrackingForm extends FormBase {
 	 */
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 
-		$affiliate_code = $form_state->getValue('affiliate_code', 'admin');
+		$affiliate_code = $form_state->getValue('affiliate_code');
 
-		AffiliateTrackingController::addTrackingCode($affiliate_code);
+		AffiliateTrackingController::addTrackingCode($affiliate_code, 'admin');
 
 		$basename = $_SERVER['HTTP_HOST'];
 

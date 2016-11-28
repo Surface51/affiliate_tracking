@@ -42,7 +42,7 @@ function affiliate_tracking_schema() {
       ),
       'nid'=>array(
         'type'=>'int',
-        'not null' => TRUE,
+        'not null' => FALSE,
       ),
       'affiliate_id'=>array(
         'type' => 'varchar',
@@ -55,6 +55,11 @@ function affiliate_tracking_schema() {
         'not null' => TRUE,
       ),
       'ip_address'=>array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'forwarder'=>array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,

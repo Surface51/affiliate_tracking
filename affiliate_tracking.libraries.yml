@@ -1,7 +1,11 @@
-affiliate_tracking:
+affiliate_tracking_private:
   version: 1.x
   css:
     theme:
       css/affiliate_tracking.icons.css: {}
   js:
     js/affiliate_tracking.js: {}
+affiliate_tracking_public:
+  version: 1.x
+  js:
+    js/affiliate_tracking_public.js: {}

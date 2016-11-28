@@ -12,6 +12,13 @@ affiliate_tracking.list_affiliates:
   requirements:
     _permission: 'view affiliate tracking results'
 
+affiliate_tracking.affiliate_details:
+  path: '/admin/affiliate_tracking/affiliate_details/{affiliate_id}'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::affiliateDetails'
+  requirements:
+    _permission: 'view affiliate tracking results'
+
 affiliate_tracking.add_code_form:
   path: '/admin/affiliate_tracking/add_code'
   defaults:
@@ -24,6 +31,14 @@ affiliate_tracking.add_code:
   path: '/admin/affiliate_tracking/add_code/new'
   defaults:
     _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::addTrackingCode'
+    _title: 'Add'
+  requirements:
+    _permission: 'access content'
+
+affiliate_tracking.process_hit:
+  path: '/process_hit/{affiliate_id}/{action}/{hit_user}'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::addTrackingHit'
     _title: 'Add'
   requirements:
     _permission: 'access content'
