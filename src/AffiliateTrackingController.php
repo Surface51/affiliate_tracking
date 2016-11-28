@@ -16,6 +16,7 @@ class AffiliateTrackingController {
 		// Table header
 		$header = array(
 			'affiliate_id' => t('Affiliate ID'),
+			'node' => t('Node'),
 			'original_user' => t('Original User'),
 			'new_user' => t('New User'),
 			'action' => t('Action'),
@@ -43,7 +44,21 @@ class AffiliateTrackingController {
 				$returned_link = $link;
 			}
 
-			$output['affiliate_id'] = $returned_link->affiliate_code;
+
+			$url = Url::fromRoute('affiliate_tracking.affiliate_details', ['affiliate_id' => $returned_link->affiliate_code]);
+			$output['affiliate_id'] = \Drupal::l($returned_link->affiliate_code,$url);
+
+			if ($row->nid != 0) {
+				$node = node_load($row->nid);
+
+				$options = ['absolute' => TRUE];
+				$url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->nid->value], $options);
+
+				$output['node'] = \Drupal::l(t($node->title->value),$url);
+			} else {
+				$output['node'] = "none";
+			}
+
 			$output['original_user'] = $returned_link->user_info;
 			$output['new_user'] = $row->user_info;
 			$output['action'] = $row->action;
@@ -57,7 +72,7 @@ class AffiliateTrackingController {
 			'#rows' => $rows,
 			'#attributes' => array(
 				'id' => 'bd-contact-table',
-			),
+			)
 		);
 
 	 	$markup = drupal_render($table);
@@ -110,7 +125,8 @@ class AffiliateTrackingController {
 				}
 			}
 
-			$output['affiliate_id'] = $row->affiliate_code;
+			$url = Url::fromRoute('affiliate_tracking.affiliate_details', ['affiliate_id' => $row->affiliate_code]);
+			$output['affiliate_id'] = \Drupal::l($row->affiliate_code,$url);
 			$output['original_user'] = $row->user_info;
 			$output['hit_count'] = $hit_count;
 			$output['register_count'] = $register_count;
