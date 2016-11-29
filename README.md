@@ -8,4 +8,7 @@ D8 Affiliate Tracking Module
 ~~Reverse Order.~~
 ~~Does it work when cache is on?~~
 ~~Link affiliate ID to affiliate ID detail page.~~
+~~ Build CSV exporter~~
+
 Use Dynamic user names.
+

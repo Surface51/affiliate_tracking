@@ -5,6 +5,13 @@ affiliate_tracking.list:
   requirements:
     _permission: 'view affiliate tracking results'
 
+affiliate_tracking.csv_export:
+  path: '/admin/affiliate_tracking/csv_export'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::csvExport'
+  requirements:
+    _permission: 'view affiliate tracking results'
+
 affiliate_tracking.list_affiliates:
   path: '/admin/affiliate_tracking/affiliates'
   defaults:

@@ -10,6 +10,7 @@ use Drupal\Core\Url;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Drupal\file\Entity\File;
 
 class AffiliateTrackingController {
 	public function content() {
@@ -44,7 +45,6 @@ class AffiliateTrackingController {
 				$returned_link = $link;
 			}
 
-
 			$url = Url::fromRoute('affiliate_tracking.affiliate_details', ['affiliate_id' => $returned_link->affiliate_code]);
 			$output['affiliate_id'] = \Drupal::l($returned_link->affiliate_code,$url);
 
@@ -78,6 +78,91 @@ class AffiliateTrackingController {
 	 	$markup = drupal_render($table);
 	 // 	$pager = array('#theme' => 'pager');
 		// $markup .= drupal_render($pager);
+	 	$markup .= "<a href='/admin/affiliate_tracking/csv_export'>Export as CSV</a>";
+		return array(
+			'#markup' => $markup,
+		);
+	}
+
+	public function csvExport() {
+
+		$list =	array();
+
+		$object[0] = 'Affiliate Id';
+		$object[1] = 'Node Visited';
+		$object[2] = 'Original User';
+		$object[3] = 'New User';
+		$object[4] = 'Action';
+		$object[5] = 'Date';
+
+		array_push($list, $object);
+
+		$db = \Drupal::database();
+		$query = $db->select('at_hits', 'n');
+		$query->fields('n');
+		$query->orderBy('n.created', 'DESC');
+		$result = $query->execute();
+
+		foreach ($result as $row) {
+			$object = array();
+
+			$query = $db->select('at_links', 'n');
+			$query->fields('n');
+			$query->condition('affiliate_id', $row->affiliate_id, "=");
+			$links = $query->execute();
+			$returned_link = null;
+			foreach ($links as $link) {
+				$returned_link = $link;
+			}
+
+			$node = node_load($row->nid);
+				$options = ['absolute' => TRUE];
+			$url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->nid->value], $options);
+
+			$url = $url->toString();
+
+			$object[0] = $returned_link->affiliate_code;
+			$object[1] = $url;
+			$object[2] = $returned_link->user_info;
+			$object[3] = $row->user_info;
+			$object[4] = $row->action;
+			$object[5] = date("Y-m-d h:i:s", $row->created);
+
+			array_push($list, $object);
+		}
+
+		//array_push($list, $object);
+
+		$filename = 'affiliate_tracking_'.date("Y-m-d_H:i:s", time()).'.csv';
+
+		$file = File::create([
+			'uid' => 1,
+			'filename' => $filename,
+			'uri' => 'public://tracking/'.$filename,
+			'status' => 1,
+		]);
+		$file->save();
+
+		$dir = dirname($file->getFileUri());
+		if (!file_exists($dir)) {
+			mkdir($dir, 0770, TRUE);
+		}
+		$output = "";
+		foreach ($list as $row) {
+			$output .= implode($row, ",");
+			$output .= "\r\n";
+		}
+
+		file_put_contents($file->getFileUri(), $output);
+		$markup =  $file->save();
+		 $option = [
+    'query' => ['user' => 'admin'],
+  	];
+  	$url = file_create_url($file->getFileUri());
+		$url = Url::fromUri($url);
+		$external_link = \Drupal::l(t('Download Link'), $url);
+
+		$markup = "The CSV file is ready: ".$external_link;
 
 		return array(
 			'#markup' => $markup,
@@ -103,8 +188,6 @@ class AffiliateTrackingController {
 		$query = $db->select('at_links', 'n');
 		$query->orderBy('n.created', 'DESC');
 		$query->fields('n');
-
-		/// REVERSE ORDER
 
 		$result = $query->execute();
 
