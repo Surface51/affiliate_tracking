@@ -42,6 +42,14 @@ affiliate_tracking.add_code:
   requirements:
     _permission: 'access content'
 
+affiliate_tracking.add_code_user:
+  path: '/affiliate_tracking/add_code/new/{user_info}'
+  defaults:
+    _controller: '\Drupal\affiliate_tracking\AffiliateTrackingController::addTrackingCode'
+    _title: 'Add'
+  requirements:
+    _permission: 'access content'
+
 affiliate_tracking.process_hit:
   path: '/process_hit/{affiliate_id}/{action}/{hit_user}'
   defaults:

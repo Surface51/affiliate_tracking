@@ -25,9 +25,9 @@ function affiliate_tracking_element_info_alter(array &$types) {
 		$types['toolbar']['#attached']['library'][] = 'affiliate_tracking/affiliate_tracking_private';
 	}
 
-	if (isset($_REQUEST['affiliate'])) {
+//	if (isset($_REQUEST['affiliate'])) {
 	//if (isset($types['toolbar'])) {
 		$types['toolbar']['#attached']['library'][] = 'affiliate_tracking/affiliate_tracking_public';
 //	}
-	}
+//	}
 }

@@ -368,9 +368,11 @@ class AffiliateTrackingController {
 			'nid' => "1",
 			'created' => time(),
 		))->execute();
-		return array(
-			'#markup' => "New tracking code is ".$name,
-		);
+
+		$response = new JsonResponse();
+		$response->setContent(json_encode($name));
+		$response->headers->set('Content-Type', 'application/json');
+		return $response;
 	}
 
 
